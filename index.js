@@ -1,48 +1,64 @@
+const generateMarkmd = require("./utils/generateMarkdown.js");
 const inquirer = require("inquirer");
 const fs = require("fs");
+const util = require("util");
 
-// array of questions for user
-const questions = [
-    inquirer
-    .prompt([
-      {
-        type: "input",
-        message: "What is your name?",
-        name: "name",
-      },
-      {
-        type: "input",
-        message: "What is your location?",
-        name: "location",
-      },
-      {
-        type: "input",
-        message: "what is your LinkedIn Username?",
-        name: "LinkedIn",
-      },
-      {
-        type: "input",
-        message: "what is your Github url?",
-        name: "Github",
-      },
-    ])
-    .then((response) => {
-      const html = generateHTML(response);
-      const fileName = `${response.name.split(" ").join(" ")}.html`;
-      fs.writeFile(fileName, html, (err) => {
-        err ? console.error(err) : console.log("success");
-      });
-    });
-  
-];
+const writeFileAsync = util.promisify(fs.writeFile);
 
-// function to write README file
-function writeToFile(fileName, data) {
-}
+const questions = () =>
+  // array of questions for user
+  // const questions = [
+  inquirer.prompt([
+    {
+      type: "input",
+      message: "What is your project name?",
+      name: "project",
+    },
+    {
+      type: "input",
+      message: "What is your user story ?",
+      name: "story",
+    },
+    {
+      type: "input",
+      message: "what is your email?",
+      name: "email",
+    },
+    {
+      type: "input",
+      message: "what is your Github url?",
+      name: "github",
+    },
+    {
+      type: "list",
+      message: "what is the licence ",
+      name: " licence",
+      choices: ["MIT", "javascript", "apache"],
+    },
+  ]);
+
+// .then((response) => {
+//   const md = generateMarkmd(response);
+//   const fileName = `${response.project.split(" ").join(" ")}.md`;
+//   fs.writeFile(fileName, md, (err) => {
+//     err ? console.error(err) : console.log("success");
+//   });
+// });
+
+// ]
+
+// // function to write README file
+// function writeToFile(fileName, data) {
+// }
 
 // function to initialize program
 function init() {
-
+  questions()
+    .then((response) =>
+      writeFileAsync("READMETEST.md", generateMarkmd(response))
+    )
+    .then(() => console.log("Successfully wrote to readme.md"))
+    .catch((err) => console.error(err));
 }
 
 // function call to initialize program

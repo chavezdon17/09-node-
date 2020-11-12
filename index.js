@@ -26,26 +26,41 @@ const questions = () =>
     },
     {
       type: "input",
-      message: "what is your Github url?",
+      message: "what is your Github Username?",
       name: "github",
     },
     {
       type: "list",
-      message: "what is the licence ",
-      name: " licence",
+      message: "what is the license ",
+      name: "license",
       choices: ["MIT", "javascript", "apache"],
     },
+    {
+      type: "input",
+      message: "description",
+      name: "description",
+    },
+    {
+      type: "input",
+      message: "installation",
+      name: "installation",
+    },
+    {
+      type: "input",
+      message: "usage",
+      name: "usage",
+    },
+    {
+      type: "input",
+      message: "contributing",
+      name: "contributing",
+    },
+    {
+      type: "input",
+      message: "tests",
+      name: "tests",
+    },
   ]);
-
-// .then((response) => {
-//   const md = generateMarkmd(response);
-//   const fileName = `${response.project.split(" ").join(" ")}.md`;
-//   fs.writeFile(fileName, md, (err) => {
-//     err ? console.error(err) : console.log("success");
-//   });
-// });
-
-// ]
 
 // // function to write README file
 // function writeToFile(fileName, data) {
@@ -54,12 +69,10 @@ const questions = () =>
 // function to initialize program
 function init() {
   questions()
-    .then((response) =>
-      writeFileAsync("READMETEST.md", generateMarkmd(response))
-    )
+    .then((response) => {
+      console.log(response);
+      return writeFileAsync("READMETEST.md", generateMarkmd(response));
+    })
     .then(() => console.log("Successfully wrote to readme.md"))
     .catch((err) => console.error(err));
 }
-
-// function call to initialize program
-init();

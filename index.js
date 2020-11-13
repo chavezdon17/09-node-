@@ -76,3 +76,4 @@ function init() {
     .then(() => console.log("Successfully wrote to readme.md"))
     .catch((err) => console.error(err));
 }
+init();

@@ -3,15 +3,26 @@ function generateMarkdown(response) {
   return `# ${response.project}
   ![license badge](https://img.shields.io/badge/Licence-MIT-blue)
   
+  ## table of contents 
+
 [license](#license)
+
+
 
 [description](#description)
 
+
+
 [installation](#installation)
+
 
 [usage](#usage)
 
+
+
 [contributing](#contributing)
+
+
 
 [test](#test)
 
@@ -19,6 +30,7 @@ function generateMarkdown(response) {
   ${response.story}
 
 ## Questions 
+If you have any questions you can reach me at my Github or my email. 
   ${response.github}
 [github profile](https://github.com/${response.github})
 ${response.email}
